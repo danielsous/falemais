@@ -25,9 +25,16 @@ describe('Call Value', () => {
     expect(httpResponse.body).toBe('any_value')
   })
 
-  test('Should throw if no httpRequest is provided', async () => {
+  test('Should return 500 if no httpRequest is provided', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.calc()
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body.error).toBe(new ServerError().message)
+  })
+
+  test('Should return 500 if httpRequest has no body', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.calc({})
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body.error).toBe(new ServerError().message)
   })
