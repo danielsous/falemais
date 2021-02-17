@@ -1,0 +1,45 @@
+{
+  "name": "falemais",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main/index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "jest --noStackTrace --detectOpenHandles --silent",
+    "test:unit": "npm test -- --watch -c jest-unit-config.js",
+    "test:staged": "npm test -- --passWithNoTests --findRelatedTests --silent",
+    "test:ci": "npm test -- --coverage --silent --colors",
+    "migrations:test": "npx sequelize db:migrate --env test"
+  },
+  "pg": {
+    "test": {
+      "migrationsScript": [
+        "yarn",
+        "run",
+        "migrations:test"
+      ]
+    }
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.5.0"
+  },
+  "devDependencies": {
+    "@databases/pg-test": "^3.0.0",
+    "husky": "^5.0.9",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.4",
+    "nodemon": "^2.0.7",
+    "sequelize-cli": "^6.2.0",
+    "standard": "^16.0.3"
+  }
+}
