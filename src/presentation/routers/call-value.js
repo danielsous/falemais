@@ -21,8 +21,9 @@ module.exports = class CallValue {
       if (!callDestine) {
         return HttpResponse.badRequest(new MissingParamError('callDestine'))
       }
-      const value = await this.calcTaxUseCase.load({ plan, estimatedTime, callOrigin, callDestine })
-      return HttpResponse.ok({ value })
+      const value = await this.calcTaxUseCase.load(plan, estimatedTime, callOrigin, callDestine)
+      const { valuePlan, valueOff } = value
+      return HttpResponse.ok({ valuePlan, valueOff })
     } catch (error) {
       return HttpResponse.serverError()
     }

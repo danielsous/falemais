@@ -24,7 +24,10 @@ const makeCalcTaxUseCase = () => {
     }
   }
   const calcTaxUseCaseSpy = new CalcTaxUseCaseSpy()
-  calcTaxUseCaseSpy.value = 'any_value'
+  calcTaxUseCaseSpy.value = {
+    valuePlan: 'any_value',
+    valueOff: 'any_value'
+  }
   return calcTaxUseCaseSpy
 }
 
@@ -50,7 +53,8 @@ describe('Call Value', () => {
     }
     const httpResponse = await sut.calc(httpRequest)
     expect(httpResponse.statusCode).toBe(200)
-    expect(httpResponse.body.value).toBe(calcTaxUseCaseSpy.value)
+    expect(httpResponse.body.valuePlan).toBe(calcTaxUseCaseSpy.value.valuePlan)
+    expect(httpResponse.body.valueOff).toBe(calcTaxUseCaseSpy.value.valueOff)
   })
 
   test('Should return 500 if no httpRequest is provided', async () => {
