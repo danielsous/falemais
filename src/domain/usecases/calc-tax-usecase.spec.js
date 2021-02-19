@@ -129,7 +129,7 @@ describe('CalcTax UseCase', () => {
     )
     for (const sut of suts) {
       const promise = sut.loadCalc('any_plan', 'any_estimatedTime', 'any_ddd_origin', 'any_ddd_destine')
-      expect(promise).toThrow()
+      expect(promise).rejects.toThrow()
     }
   })
 
@@ -146,7 +146,7 @@ describe('CalcTax UseCase', () => {
     )
     for (const sut of suts) {
       const promise = sut.loadCalc('any_plan', 'any_estimatedTime', 'any_ddd_origin', 'any_ddd_destine')
-      expect(promise).toThrow()
+      expect(promise).rejects.toThrow()
     }
   })
 })
