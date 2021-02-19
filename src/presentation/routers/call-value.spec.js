@@ -1,4 +1,4 @@
-const { ServerError, MissingParamError } = require('../errors')
+const { ServerError, MissingParamError, UnauthorizedError } = require('../errors')
 const CallValue = require('./call-value')
 
 const makeSut = () => {
@@ -41,7 +41,7 @@ const makeCalcTaxUseCaseWithError = () => {
 }
 
 describe('Call Value', () => {
-  test('Should return 200 if params are provided', async () => {
+  test('Should return 200 if valid params are provided', async () => {
     const { sut, calcTaxUseCaseSpy } = makeSut()
     const httpRequest = {
       body: {
@@ -55,6 +55,22 @@ describe('Call Value', () => {
     expect(httpResponse.statusCode).toBe(200)
     expect(httpResponse.body.valuePlan).toBe(calcTaxUseCaseSpy.value.valuePlan)
     expect(httpResponse.body.valueOff).toBe(calcTaxUseCaseSpy.value.valueOff)
+  })
+
+  test('Should return 401 if invalid params are provided', async () => {
+    const { sut, calcTaxUseCaseSpy } = makeSut()
+    calcTaxUseCaseSpy.value = null
+    const httpRequest = {
+      body: {
+        plan: 'invalid_plan',
+        estimatedTime: 10,
+        callOrigin: 'invalid_ddd_origin',
+        callDestine: 'invalid_ddd_destine'
+      }
+    }
+    const httpResponse = await sut.calc(httpRequest)
+    expect(httpResponse.statusCode).toBe(401)
+    expect(httpResponse.body.error).toBe(new UnauthorizedError().message)
   })
 
   test('Should return 500 if no httpRequest is provided', async () => {
