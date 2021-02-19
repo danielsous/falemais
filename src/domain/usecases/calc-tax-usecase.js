@@ -7,7 +7,7 @@ class CalcTaxUseCase {
     this.loadTaxByCallOriginRepository = loadTaxByCallOriginRepository
   }
 
-  async load (plan, estimatedTime, callOrigin, callDestine) {
+  async loadCalc (plan, estimatedTime, callOrigin, callDestine) {
     if (!plan) {
       throw new MissingParamError('plan')
     }

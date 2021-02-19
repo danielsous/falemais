@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "test": "jest --noStackTrace --detectOpenHandles --silent",
-    "test:unit": "npm test -- --coverage --silent --colors --watch -c jest-unit-config.js",
+    "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:staged": "npm test -- --passWithNoTests --findRelatedTests --silent",
     "test:ci": "npm test -- --coverage --silent --colors",
     "migrations:test": "npx sequelize db:migrate --env test"
