@@ -15,7 +15,7 @@ const makeSut = () => {
 
 const makeCalcTaxUseCase = () => {
   class CalcTaxUseCaseSpy {
-    async load (plan, estimatedTime, callOrigin, callDestine) {
+    async loadCalc (plan, estimatedTime, callOrigin, callDestine) {
       this.plan = plan
       this.estimatedTime = estimatedTime
       this.callOrigin = callOrigin
@@ -33,7 +33,7 @@ const makeCalcTaxUseCase = () => {
 
 const makeCalcTaxUseCaseWithError = () => {
   class CalcTaxUseCaseSpy {
-    async load () {
+    async loadCalc () {
       throw new Error()
     }
   }
