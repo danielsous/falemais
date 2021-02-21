@@ -32,8 +32,14 @@ class ConnectDatabase {
   }
 
   connectMainDB (env) {
+    let envDatabase
+    if (env) {
+      envDatabase = 'falemais_test'
+    } else {
+      envDatabase = 'falemais'
+    }
     const database = new Sequelize(
-      `falemais${env}`,
+      envDatabase,
       'postgres',
       '572600',
       {
