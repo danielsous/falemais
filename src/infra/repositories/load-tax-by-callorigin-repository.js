@@ -18,6 +18,6 @@ class LoadTaxByCallOriginRepository {
       where: { origin: callOrigin, destine: callDestine },
       attributes: ['tax']
     })
-    return tax
+    return tax.dataValues.tax
   }
 }

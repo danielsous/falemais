@@ -15,6 +15,6 @@ class LoadPlanByIDRepository {
       where: { id: id },
       attributes: ['minutes']
     })
-    return minutes
+    return minutes.dataValues.minutes
   }
 }
